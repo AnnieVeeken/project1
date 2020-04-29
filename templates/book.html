@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book
+{% endblock %}
+
+{% block main %}
+  <h1>{{ book.title }}</h1>
+  <h2>{{ book.author }}</h2>
+  <p>published in {{ book.year }}, isbn: {{ book.isbn }}</p>
+  <h5>avarage rating by {{ ratings_count }} readers: {{ rating }}</h5>
+  <br>
+  <form action="/book/{{ book.id }}" method="post">
+      <div class="form-group">
+          <input autocomplete="off" autofocus class="form-control" name="review_text" placeholder="Your review" type="text">
+      </div>
+      Rate it:
+      <div class="form-group">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="stars" id="one" value="one">
+          <label class="form-check-label" for="one">*</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="stars" id="two" value="two">
+          <label class="form-check-label" for="two">**</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="stars" id="three" value="three">
+          <label class="form-check-label" for="three">***</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="stars" id="four" value="four">
+          <label class="form-check-label" for="four">****</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="stars" id="five" value="five">
+          <label class="form-check-label" for="five">*****</label>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+  <br>
+  <table>
+    <tr>
+      <th>Reviews</th>
+    </tr>
+    {% for row in rows %}
+    <tr>
+        <td>{{ row.review_text|e }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}
